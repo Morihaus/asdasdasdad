@@ -16,5 +16,4 @@ public:
 };
 
 
-
 #endif // STATIKTEXT_HPP_INCLUDED

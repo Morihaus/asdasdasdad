@@ -21,8 +21,6 @@ protected:
     std::vector<std::string> elements;
     bool open=false;
 
-private:
-
 };
 
 #endif // roll_H

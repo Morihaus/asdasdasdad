@@ -1,6 +1,5 @@
 #ifndef counter_H
 #define counter_H
-#include "graphics.hpp"
 #include "widgets.h"
 #include <sstream>
 

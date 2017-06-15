@@ -4,19 +4,15 @@
 #include "roll.h"
 #include "statiktext.hpp"
 #include "textbox.hpp"
-#include <fstream>
-#include <vector>
-#include <iostream>
+#include "field.hpp"
 
-const int XX =600;
-const int YY =600;
-using namespace genv;
 using namespace std;
 
 
 int main()
 {
+    Field egesz;
+    egesz.event_loop();
 
     return 0;
 }
-

@@ -7,7 +7,6 @@ class widgets
 protected:
     int _x, _y, _m_y,_m_x;
     int _numb = 0;
-    //bool _focused;
 public:
     widgets(int x, int y, int m_x, int m_y);
     virtual ~widgets();

@@ -68,7 +68,6 @@ void counter::handle(event ev)
     int p_x=ev.pos_x;
     int p_y=ev.pos_y;
 
-
     if(p_x>=get_x()+get_m_x()-20&& p_x<=get_x()+get_m_x() && p_y>=get_y() && p_y<get_y()+(get_m_y()/2))
     {
         if( ev.button == btn_left)
