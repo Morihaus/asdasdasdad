@@ -7,6 +7,7 @@ class TextBox : public widgets
 {
 private:
     std::string _s;
+    std::string seged_s;
     int ido1,ido2;
 public:
     TextBox(int x, int y, int m_x, int m_y, std::string s);
