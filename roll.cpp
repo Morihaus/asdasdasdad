@@ -14,6 +14,10 @@ roll::~roll()
 
 bool roll::is_selected(int mouse_x, int mouse_y) const
 {
+    if(open)
+    {
+        return mouse_x>_x && mouse_x<_x+_m_x && mouse_y>_y && mouse_y<_y+_m_y+elements.size()*gout.cascent()*2;
+    }
     return mouse_x>_x && mouse_x<_x+_m_x && mouse_y>_y && mouse_y<_y+_m_y;
 }
 
@@ -48,9 +52,9 @@ void roll::handle(event ev)
         int yy=_y+_m_y;
         for(int i=0; i<elements.size(); i++)
         {
-            if(ev.pos_y>=yy+(20)*i && ev.pos_y<=yy+(20)*(i+1))
+            if(ev.type==ev_mouse && ev.button == btn_left)
             {
-                if(ev.type== ev_mouse && ev.button==btn_left)
+                if(ev.pos_y>=yy+(20)*i && ev.pos_y<=yy+(20)*(i+1) && ev.pos_x>=_x && ev.pos_x<=_x+_m_x)
                 {
                     _numb=i;
                     close();
