@@ -16,20 +16,23 @@ bool TextBox::is_selected( int mouse_x, int mouse_y ) const
 
 void TextBox::draw()
 {
+    while (gout.twidth(_s)>_m_x-5)
+    {
+        _s=_s.substr(1,_s.length());
+    }
     gout << move_to(_x, _y) << color(179,255,254) << box(_m_x, _m_y);
-    gout << color(0,0,0)<<move_to(_x+8,_y+20) << text(_s);
+    gout << color(0,0,0)<<move_to(_x+8,_y+20)<<text(_s);
+
 }
 
 void TextBox::handle(event ev)
 {
-    if (ev.type==ev_key && ev.keycode >=0 && ev.keycode < 255 && _x+_s.length()*10<_x+_m_x-20)
+    if (ev.type==ev_key && ev.keycode >=32 && ev.keycode < 255 && gout.twidth(_s)<_m_x-5)
     {
-        _s+=char(ev.keycode);
+        _s+=ev.keycode;
     }
-    if (ev.type==ev_key && ev.keycode == key_backspace && _s.length()!=0)
+    if (ev.type==ev_key && ev.keycode == key_backspace && _s.length()>0)
     {
-        _s.erase(_s.length()-1);
-        gout<<move_to(_x, _y)<<color(179,255,254)<<box(_m_x,_m_y);
+        _s.erase(_s.end()-1);
     }
-
 }
