@@ -22,12 +22,35 @@ void Field::event_loop()
     r.push_back(new counter(XX/2,YY/6,100,40,10,0,59,true));
     r.push_back(new Statik(100,500,150,540,"valami"));
     r.push_back(new TextBox(50,200,100,40,"asdasd"));
+    std::vector <std::string> elements;
+    elements.push_back("Easy");
+    elements.push_back("Medium");
+    elements.push_back("Hard");
+    r.push_back(new roll(XX/2,YY/3,200,30,elements));
 
 
     while(gin >> ev && ev.keycode != key_escape)
     {
-
-
+        if( ev.type == ev_mouse && ev.button==btn_left )
+        {
+            focus = -1;
+            for( int i=0; i<r.size(); i++ )
+            {
+                if( r[i]->is_selected(ev.pos_x, ev.pos_y) )
+                {
+                    focus = i;
+                }
+            }
+        }
+        if( focus!=-1 )
+        {
+            r[focus]->handle(ev);
+        }
+        for( int i=0; i<r.size(); i++ )
+        {
+            r[i]->draw();
+        }
+        gout << refresh;
     }
 
 }
