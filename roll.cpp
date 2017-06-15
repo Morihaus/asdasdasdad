@@ -12,6 +12,11 @@ roll::~roll()
 {
 }
 
+bool roll::is_selected(int mouse_x, int mouse_y) const
+{
+    return mouse_x>_x && mouse_x<_x+_m_x && mouse_y>_y && mouse_y<_y+_m_y;
+}
+
 void roll::close()
 {
     gout << move_to(get_x(),get_y()+get_m_y()) << color(0,0,0) << box(get_m_x(),elements.size()*gout.cascent()*2);
@@ -38,7 +43,22 @@ void roll::rolling()
 }
 void roll::handle(event ev)
 {
-    if(ev.pos_x>=get_x()+get_m_x()-20 && ev.pos_x<get_x()+get_m_x() && ev.pos_y>get_y() && ev.pos_y<get_y()+get_m_y())
+    if(open && ev.pos_x>=_x && ev.pos_x<=_x+_m_x)
+    {
+        int yy=_y+_m_y;
+        for(int i=0; i<elements.size(); i++)
+        {
+            if(ev.pos_y>=yy+(20)*i && ev.pos_y<=yy+(20)*(i+1))
+            {
+                if(ev.type== ev_mouse && ev.button==btn_left)
+                {
+                    set_numb(i);
+                    close();
+                }
+            }
+        }
+    }
+    if(ev.pos_x>=_x+_m_x-20 && ev.pos_x<_x+_m_x && ev.pos_y>_y && ev.pos_y<_y+_m_y)
     {
         if(ev.type == ev_mouse && ev.button == btn_left)
         {
@@ -52,8 +72,9 @@ void roll::handle(event ev)
             }
         }
     }
+
 }
-void roll::choose(event ev)
+/*void roll::choose(event ev)
 {
     if(open)
     {
@@ -70,11 +91,10 @@ void roll::choose(event ev)
                         close();
                     }
                 }
-
             }
         }
     }
-}
+}*/
 
 std::string roll::get_things()
 {
