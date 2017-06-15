@@ -5,14 +5,12 @@
 
 class Statik : public widgets
 {
-protected:
-    bool _checked;
+private:
     std::string _s;
 public:
     Statik(int x, int y, int m_x, int m_y, std::string s);
-    virtual void draw();
-    virtual void handle(genv::event);
-    virtual bool is_checked();
+    void draw();
+    void handle(genv::event);
 };
 
 

@@ -4,6 +4,7 @@
 #include "counter.h"
 #include "textbox.hpp"
 #include "widgets.h"
+#include "examplecheckbox.hpp"
 #include <iostream>
 
 using namespace std;
@@ -29,6 +30,7 @@ void Field::event_loop()
     elements.push_back("Hard");
     roll* ez=(new roll(XX/2,YY/3,200,30,elements));
     r.push_back(ez);
+    r.push_back(new examplecheckbox(80,400,65,30,"hozzaad"));
 
     while(gin >> ev && ev.keycode!= key_escape)
     {
