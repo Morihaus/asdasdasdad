@@ -16,13 +16,12 @@ void TextBox::draw()
 void TextBox::handle(event ev)
 {
 
-    if (ev.type == ev_key && ev.pos_x>_x && ev.pos_x<_x+_m_x && ev.pos_y>=_y && ev.pos_y<_y+_m_x)
+    if (ev.pos_x>_x && ev.pos_x<_x+_m_x && ev.pos_y>=_y && ev.pos_y<_y+_m_x)
     {
-        cout<<"itt vagyok"<<endl;
         if (ev.keycode >= ' ' && ev.keycode < 255)
         {
             _s += ev.keycode;
-            if (get_m_x() < 10+gout.twidth(_s) )
+            if (_m_x < 10+gout.twidth(_s) )
             {
                 _s = _s.substr(0,_s.length()-1);
             }

@@ -5,13 +5,13 @@
 
 class TextBox : public widgets
 {
-protected:
+private:
     std::string _s;
     int ido1,ido2;
 public:
     TextBox(int x, int y, int m_x, int m_y, std::string s);
-    virtual void draw();
-    virtual void handle(genv::event);
+    void draw();
+    void handle(genv::event);
 
 };
 
