@@ -19,15 +19,15 @@ bool roll::is_selected(int mouse_x, int mouse_y) const
 
 void roll::close()
 {
-    gout << move_to(get_x(),get_y()+get_m_y()) << color(0,0,0) << box(get_m_x(),elements.size()*gout.cascent()*2);
+    gout << move_to(_x,_y+_m_y) << color(0,0,0) << box(_m_x,elements.size()*gout.cascent()*2);
     open=false;
 }
 void roll::draw()
 {
-    gout << move_to(get_x(),get_y()) << color(179,255,254) << box(get_m_x(),get_m_y());
-    gout << move_to(get_x()+5,get_y()+(get_m_y()/2)+gout.cascent()/2) << color(0,0,0) << text(elements[get_numb()]);
-    gout << move_to(get_x()+get_m_x()-(get_m_x()/8),get_y()) << color(255,179,234) << box(get_m_x()/8,get_m_y())
-         << move_to(get_x()+get_m_x()-(get_m_x()/12),get_y()+(get_m_y()/2)+gout.cascent()/2) <<color(150,150,150)<<text("V");
+    gout << move_to(_x,_y) << color(179,255,254) << box(_m_x,_m_y);
+    gout << move_to(_x+5,_y+(_m_y/2)+gout.cascent()/2) << color(0,0,0) << text(elements[_numb]);
+    gout << move_to(_x+_m_x-(_m_x/8),_y) << color(255,179,234) << box(_m_x/8,_m_y)
+         << move_to(_x+_m_x-(_m_x/12),_y+(_m_y/2)+gout.cascent()/2) <<color(150,150,150)<<text("V");
 }
 
 void roll::rolling()
@@ -35,15 +35,15 @@ void roll::rolling()
     int py=get_m_y();
     for(int i=0; i<elements.size(); i++)
     {
-        gout << move_to(get_x(),get_y()+py) << color(179,255,254) << box(get_m_x(),gout.cascent()*2);
-        gout << move_to(get_x()+5,get_y()+py+gout.cascent()) << color(0,0,0) << text(elements[i]);
+        gout << move_to(_x,_y+py) << color(179,255,254) << box(_m_x,gout.cascent()*2);
+        gout << move_to(_x+5,_y+py+gout.cascent()) << color(0,0,0) << text(elements[i]);
         py=py+20;
     }
     open=true;
 }
 void roll::handle(event ev)
 {
-    if(open && ev.pos_x>=_x && ev.pos_x<=_x+_m_x)
+    if(open)
     {
         int yy=_y+_m_y;
         for(int i=0; i<elements.size(); i++)
@@ -52,7 +52,7 @@ void roll::handle(event ev)
             {
                 if(ev.type== ev_mouse && ev.button==btn_left)
                 {
-                    set_numb(i);
+                    _numb=i;
                     close();
                 }
             }
