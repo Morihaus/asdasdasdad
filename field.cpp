@@ -22,7 +22,7 @@ void Field::event_loop()
     r.push_back(new counter(XX/12,YY/6,100,40,6,0,23,false));
     r.push_back(new counter(XX/2,YY/6,100,40,10,0,59,true));
     r.push_back(new Statik(100,500,150,540,"valami"));
-    r.push_back(new TextBox(50,200,140,40,""));
+    r.push_back(new TextBox(50,200,140,40,"asd"));
     std::vector <std::string> elements;
     elements.push_back("Easy");
     elements.push_back("Medium");
@@ -59,6 +59,7 @@ void Field::event_loop()
         {
             r[i]->draw();
         }
+        allit=false;
         gout << refresh;
     }
 
